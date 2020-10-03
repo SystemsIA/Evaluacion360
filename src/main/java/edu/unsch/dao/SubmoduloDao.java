@@ -7,14 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import edu.unsch.entities.Modulo;
+import edu.unsch.entities.Submodulo;
 
 @Repository
-public interface ModuloDao extends JpaRepository<Modulo, Serializable>{
-	/*
-	 * new Modulo(m.idmodulo as idmodulo, m.nombre as nombre, m.icono as icono) 
-	 */
-	@Query(value = "SELECT m "
+public interface SubmoduloDao extends JpaRepository<Submodulo, Serializable>{
+	
+	@Query(value = "SELECT s "
 			+ "FROM PerfilOpcion po "
 			+ "INNER JOIN po.opcion o "
 			+ "INNER JOIN o.submodulo s "
@@ -27,6 +25,6 @@ public interface ModuloDao extends JpaRepository<Modulo, Serializable>{
 									+ "INNER JOIN up.usuario u "
 									+ "WHERE u.usuario = ?1 "
 									+ ") "
-			+ "GROUP BY m.idmodulo")
-	List<Modulo> listaModulos(String usuario);
+			+ "GROUP BY s.idsubmodulo")
+	List<Submodulo> listaSubmodulos(String usuario);
 }

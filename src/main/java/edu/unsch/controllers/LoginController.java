@@ -11,14 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.unsch.entities.Usuario;
-import edu.unsch.services.UsuarioServiceImpl;
+import edu.unsch.services.ModuloService;
+import edu.unsch.services.SubmoduloService;
+import edu.unsch.services.UsuarioService;
 
 @Controller
 @RequestMapping
 public class LoginController {
 
 	@Autowired
-	private UsuarioServiceImpl usuarioServiceImpl;
+	private UsuarioService usuarioServiceImpl;
+
+	@Autowired
+	private ModuloService moduloService;
+
+	@Autowired
+	private SubmoduloService submoduloService;
 	
 	@GetMapping({ "", "/login" })
 	public String login(Model model) {
@@ -33,7 +41,7 @@ public class LoginController {
 		Usuario user = this.usuarioServiceImpl.login(request.getParameter("username"),
 				request.getParameter("password"));
 
-//		Login del Admin
+		// Login del Admin
 		Usuario useradmin = this.usuarioServiceImpl.loginAdmin(request.getParameter("username"),
 				request.getParameter("password"));
 
@@ -41,8 +49,10 @@ public class LoginController {
 			model.addAttribute("error", "Cuenta Inválida");
 			return "redirect:/login";
 		} else if (useradmin != null) {
-
 			session.setAttribute("usuario", useradmin.getUsuario());
+			session.setAttribute("modulos", moduloService.listaModulos(useradmin.getUsuario()));
+			session.setAttribute("submodulos", submoduloService.listaSubmodulos(useradmin.getUsuario()));
+
 			return "redirect:/admin/home";
 		} else {
 

@@ -27,7 +27,7 @@ public class LoginController {
 
 	@Autowired
 	private SubmoduloService submoduloService;
-	
+
 	@GetMapping({ "", "/login" })
 	public String login(Model model) {
 		model.addAttribute("title", "Log In");
@@ -70,4 +70,12 @@ public class LoginController {
 		return "redirect:/login";
 	}
 
+	@PostMapping(value = "/")
+	public String register(HttpServletRequest request, Model model) {
+
+		usuarioServiceImpl.registrarComprador(request.getParameter("nombre"), request.getParameter("usuario"),
+				request.getParameter("password"));
+
+		return "redirect:/login";
+	}
 }

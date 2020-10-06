@@ -7,17 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping
 public class FrontHomeController {
 
-	
 	@GetMapping("/home")
-	public String index(HttpSession session ,Model model) {
-		
-		
-		model.addAttribute("usuario", session.getAttribute("usuario"));
+	public String index(HttpSession session, Model model) {
+
+		model.addAttribute("usuario", session.getAttribute("usuario")).addAttribute("title", "Inicio");
 		return "views/front/index";
 	}
 }

@@ -16,7 +16,6 @@ public class SubmoduloServiceImpl implements SubmoduloService {
 	
 	@Override
 	public List<Submodulo> listaSubmodulos(String usuario) {
-		// TODO Auto-generated method stub
 		return submoduloDao.listaSubmodulos(usuario);
 	}
 

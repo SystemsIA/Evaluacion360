@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "modulo", catalog = "evaluacion360")
 public class Modulo implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -375757434277809570L;
 	private Integer idmodulo;
 	private String nombre;
 	private String icono;
